@@ -26,7 +26,9 @@ set(TARGET_DEPENDS
 )
 
 include_directories(include)
-add_executable(behavior_node src/demonstrator_bahavior.cpp)
+add_executable(behavior_node src/main.cpp
+src/demonstrator_bahavior.cpp
+)
 ament_target_dependencies(behavior_node ${TARGET_DEPENDS})
 
 install(TARGETS

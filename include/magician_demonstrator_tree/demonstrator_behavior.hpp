@@ -31,7 +31,9 @@ class MagicianSubNode : public rclcpp::Node{
 
     
     private:
+    
     bool is_home_flage_{true};
+
     std::map<std::string,double> home_joints_ = {
     {"joint_1", 0.0},
     {"joint_2", 0.605},
@@ -44,7 +46,7 @@ class MagicianSubNode : public rclcpp::Node{
     const double JOINT_TOL = 0.01;
     void homePosCallBack(const sensor_msgs::msg::JointState::ConstSharedPtr msg);
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr home_axis_pos_;
-
+    
 };
 
 
@@ -55,23 +57,8 @@ class MagicianClientNode  : public rclcpp::Node{
     MagicianClientNode(const std::string& node_name);
     
     BT::NodeStatus homingServiceCall();
+    BT::NodeStatus OpcUaServiceCall();
 
     private:
     rclcpp::Client<dsr_msgs2::srv::MoveHome>::SharedPtr homing_client_;
-};
-
-
-
-
-class CallOpcUI : public BT::SyncActionNode{
-
-    public:
-
-    explicit CallOpcUI(const std::string& name,
-                       const BT::NodeConfiguration& config,
-                        rclcpp::Node::SharedPtr& node_ptr);
-
-    BT::NodeStatus tick()override;
-    static BT::PortsList providedPorts();
-
 };
